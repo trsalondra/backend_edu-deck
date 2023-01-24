@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 
 // create/post a deck
 const createDeck = async (req, res) => {
-    const { title, description, createdBy} = req.body 
+    const { title, description, createdBy } = req.body
 
     if (!title) {
-      return res.status(400).json({ error: 'Most complete title field'})
+        return res.status(400).json({ error: 'Most complete title field' })
     }
 
     // add doc to db
     try {
-        const deck = await Deck.create({ title, description, createdBy})
+        const deck = await Deck.create({ title, description, createdBy })
         res.status(200).json(deck)
     } catch (err) {
         res.status(400).json({ error: err.message })
@@ -49,10 +49,10 @@ const updateDeck = async (req, res) => {
         res.status(404).json({ error: 'No such deck' })
     }
 
-    const deck = await Deck.findByIdAndUpdate({ _id: id }, {...req.body})
+    const deck = await Deck.findByIdAndUpdate({ _id: id }, { ...req.body })
 
-    if(!deck) {
-        res.status(404).json({error: 'No such deck'})
+    if (!deck) {
+        res.status(404).json({ error: 'No such deck' })
     }
 
     res.status(200).json(deck)
@@ -75,10 +75,23 @@ const deleteDeck = async (req, res) => {
     res.status(200).json(deck)
 }
 
+
+const countDeck = async (req, res) => {
+    const { title } = req.params
+
+    const deck = await Deck.find({title: title}).count()
+
+    if (!deck) {
+        res.status(404).json({ error: 'No such deck' })
+    } else {
+        res.status(200).json(deck)
+    }
+}
 module.exports = {
     getDecks,
     deleteDeck,
     updateDeck,
     createDeck,
-    getDeck
+    getDeck,
+    countDeck
 }

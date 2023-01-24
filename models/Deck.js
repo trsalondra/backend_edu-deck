@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const deckSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
@@ -13,7 +13,8 @@ const deckSchema = new Schema({
     },
     createdBy: {
         type: String,
-        required: true
+        // required: true
+        default: "301"
     },
     createdAt: {
         type: Date,

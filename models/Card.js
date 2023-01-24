@@ -13,11 +13,11 @@ const cardSchema = new Schema({
     },
     createdBy: {
         type: String,
-        required: true
+        default: "101"
     },
     deckId: {
         type: String,
-        required: true
+        default: "201"
     },
     correctCount: {
         type: Number,
