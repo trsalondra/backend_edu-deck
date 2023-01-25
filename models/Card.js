@@ -17,7 +17,7 @@ const cardSchema = new Schema({
     },
     deckId: {
         type: String,
-        default: "201"
+        default: "math"
     },
     correctCount: {
         type: Number,

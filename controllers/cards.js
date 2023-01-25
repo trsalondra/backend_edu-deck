@@ -75,10 +75,36 @@ const deleteCard = async (req, res) => {
     res.status(200).json(card)
 }
 
+const getCardsByDeckId = async (req, res) => {
+    const { deckId } = req.params
+
+    const deckCount = await Card.find({deckId: deckId}) 
+
+    if (!deckCount) {
+        res.status(404).json({ error: 'No such deck' })
+    } else {
+        res.status(200).json(deckCount)
+    }
+}
+
+const getCardCountByDeckId = async (req, res) => {
+    const { deckId } = req.params
+
+    const deckCount = await Card.find({deckId: deckId}).count()
+
+    if (!deckCount) {
+        res.status(404).json({ error: 'No such deck' })
+    } else {
+        res.status(200).json(deckCount)
+    }
+}
+
 module.exports = {
     getCards,
     deleteCard,
     updateCard,
     createCard,
-    getCard
+    getCard, 
+    getCardsByDeckId,
+    getCardCountByDeckId
 }

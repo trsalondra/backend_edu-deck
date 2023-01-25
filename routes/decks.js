@@ -5,13 +5,13 @@ const router = express.Router()
 // CREATE
 router.post('/', deckConroller.createDeck)
 
-// READ/INDEX
+// SHOW ALL
 router.get('/', deckConroller.getDecks)
 
 // DECK COUNT
 router.get('/count/:title', deckConroller.countDeck)
 
-// READ/SHOW
+// SHOW ONE
 router.get('/:id', deckConroller.getDeck)
 
 // UPDATE

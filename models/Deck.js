@@ -11,11 +11,6 @@ const deckSchema = new Schema({
         type: String,
         required: false
     },
-    createdBy: {
-        type: String,
-        // required: true
-        default: "301"
-    },
     createdAt: {
         type: Date,
         default: Date.new

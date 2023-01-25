@@ -3,12 +3,18 @@ const cardConroller = require('../controllers/cards')
 const router = express.Router()
 
 // CREATE
-router.post('/create-card', cardConroller.createCard)
+router.post('/', cardConroller.createCard)
 
-// READ/INDEX
+// SHOW ALL
 router.get('/', cardConroller.getCards)
 
-// READ/SHOW
+// SHOW DECK
+router.get('/deck/:deckId', cardConroller.getCardsByDeckId)
+
+// DECK COUNT
+router.get('/count/:deckId', cardConroller.getCardCountByDeckId)
+
+// SHOW ONE
 router.get('/:id', cardConroller.getCard)
 
 // UPDATE
