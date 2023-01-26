@@ -9,10 +9,13 @@ router.post('/', cardConroller.createCard)
 router.get('/', cardConroller.getCards)
 
 // SHOW DECK
-router.get('/deck/:deckId', cardConroller.getCardsByDeckId)
+router.get('/deck/:deckTitle', cardConroller.getCardsByDeckTitle)
 
 // DECK COUNT
-router.get('/count/:deckId', cardConroller.getCardCountByDeckId)
+router.get('/count/:deckTitle', cardConroller.getCardCountByDeckTitle)
+
+// DECK ALL CARDS IN A DECK
+router.delete('/deletedeck/:deckTitle', cardConroller.deleteCardsByDeckTitle)
 
 // SHOW ONE
 router.get('/:id', cardConroller.getCard)

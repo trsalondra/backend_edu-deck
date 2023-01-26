@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // create/post a card
 const createCard = async (req, res) => {
-    const { front, back, createdBy, deckId} = req.body 
+    const { front, back, userId, deckTitle, deckId} = req.body 
 
     if (!front || !back) {
       return res.status(400).json({ error: 'Must complete both fields'})
@@ -11,7 +11,7 @@ const createCard = async (req, res) => {
 
     // add doc to db
     try {
-        const card = await Card.create({ front, back, createdBy, deckId })
+        const card = await Card.create({ front, back, userId, deckTitle, deckId })
         res.status(200).json(card)
     } catch (err) {
         res.status(400).json({ error: err.message })
@@ -75,10 +75,10 @@ const deleteCard = async (req, res) => {
     res.status(200).json(card)
 }
 
-const getCardsByDeckId = async (req, res) => {
-    const { deckId } = req.params
+const getCardsByDeckTitle = async (req, res) => {
+    const { deckTitle } = req.params
 
-    const deckCount = await Card.find({deckId: deckId}) 
+    const deckCount = await Card.find({deckTitle: deckTitle}) 
 
     if (!deckCount) {
         res.status(404).json({ error: 'No such deck' })
@@ -86,11 +86,24 @@ const getCardsByDeckId = async (req, res) => {
         res.status(200).json(deckCount)
     }
 }
+//working
+const deleteCardsByDeckTitle = async (req, res) => {
+    const { deckTitle } = req.params
 
-const getCardCountByDeckId = async (req, res) => {
-    const { deckId } = req.params
+    const cards = await Card.deleteMany({deckTitle: deckTitle}) 
 
-    const deckCount = await Card.find({deckId: deckId}).count()
+    if (!cards) {
+        res.status(404).json({ error: 'No such cards exist with that tile' })
+    }
+
+    res.status(200).json(cards)
+
+}
+
+const getCardCountByDeckTitle = async (req, res) => {
+    const { deckTitle } = req.params
+
+    const deckCount = await Card.find({deckTitle: deckTitle}).count()
 
     if (!deckCount) {
         res.status(404).json({ error: 'No such deck' })
@@ -105,6 +118,7 @@ module.exports = {
     updateCard,
     createCard,
     getCard, 
-    getCardsByDeckId,
-    getCardCountByDeckId
+    getCardsByDeckTitle,
+    getCardCountByDeckTitle,
+    deleteCardsByDeckTitle
 }

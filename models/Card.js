@@ -11,13 +11,17 @@ const cardSchema = new Schema({
         type: String,
         required: true
     },
-    createdBy: {
+    userId: { 
         type: String,
-        default: "101"
+        required: false // will require when implementing auth
+    },
+    deckTitle: {
+        type: String,
+        required: true
     },
     deckId: {
         type: String,
-        default: "math"
+        required: false
     },
     correctCount: {
         type: Number,
