@@ -1,6 +1,5 @@
-const express = require('express')
+const router = require('express').Router()
 const deckConroller = require('../controllers/decks')
-const router = express.Router()
 
 // CREATE
 router.post('/', deckConroller.createDeck)

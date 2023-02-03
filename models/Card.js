@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const Schema = mongoose.Schema
-
-const cardSchema = new Schema({
+const cardSchema = new mongoose.Schema({
     front: {
         type: String,
         required: true
@@ -12,16 +10,12 @@ const cardSchema = new Schema({
         required: true
     },
     userId: { 
-        type: String,
-        required: false // will require when implementing auth
-    },
-    deckTitle: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     deckId: {
-        type: String,
-        required: false
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Deck"
     },
     correctCount: {
         type: Number,
@@ -33,4 +27,4 @@ const cardSchema = new Schema({
     }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Card', cardSchema)
+module.exports = mongoose.model("Card", cardSchema)

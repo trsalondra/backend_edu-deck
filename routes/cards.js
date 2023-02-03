@@ -1,6 +1,6 @@
-const express = require('express')
+const router = require('express').Router()
 const cardConroller = require('../controllers/cards')
-const router = express.Router()
+
 
 // CREATE
 router.post('/', cardConroller.createCard)
